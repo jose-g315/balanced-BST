@@ -1,23 +1,23 @@
 {
-	"name": "hash-map",
+	"name": "balanced-bst",
 	"version": "1.0.0",
-	"description": "",
+	"description": "Implementing a balanced bst with JS",
 	"main": "index.js",
 	"scripts": {
 		"test": "jest"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/jose-g315/hash-map.git"
+		"url": "git+https://github.com/jose-g315/balanced-BST.git"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"type": "module",
 	"bugs": {
-		"url": "https://github.com/jose-g315/hash-map/issues"
+		"url": "https://github.com/jose-g315/balanced-BSTp/issues"
 	},
-	"homepage": "https://github.com/jose-g315/hash-map#readme",
+	"homepage": "https://github.com/jose-g315/balanced-BST#readme",
 	"devDependencies": {
 		"@babel/preset-env": "^7.29.0",
 		"@biomejs/biome": "2.4.3",
