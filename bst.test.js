@@ -1,0 +1,32 @@
+import { Tree } from './bst.js';
+
+describe('balanced binary search tree', () => {
+	let tree;
+
+	beforeEach(() => {
+		tree = new Tree([5, 3, 3, 1, 4, 2, 2]);
+	});
+	describe('constructor and buildTree', () => {
+		test('constructor sorts and removes duplicates', () => {
+			// The root of a balanced tree built from [1,2,3,4,5] is 3
+			expect(tree.root.data).toBe(3);
+		});
+		test('buildTree creates a balanced BST', () => {
+			const tree = new Tree([1, 2, 3, 4, 5, 6, 7]);
+
+			expect(tree.root.data).toBe(4);
+			expect(tree.root.left.data).toBe(2);
+			expect(tree.root.right.data).toBe(6);
+
+			expect(tree.root.left.left.data).toBe(1);
+			expect(tree.root.left.right.data).toBe(3);
+
+			expect(tree.root.right.left.data).toBe(5);
+			expect(tree.root.right.right.data).toBe(7);
+		});
+		test('buildTree returns null for empty array', () => {
+			const tree = new Tree([]);
+			expect(tree.root).toBeNull();
+		});
+	});
+});
