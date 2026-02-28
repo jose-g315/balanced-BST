@@ -20,6 +20,26 @@ class Tree {
 		root.right = this._buildTree(array.slice(midIndex + 1));
 		return root;
 	}
+	has(value, node = this.root) {
+		if (node === null) return false;
+		if (node.data === value) return true;
+		if (value < node.data) {
+			return this.has(value, node.left);
+		} else {
+			return this.has(value, node.right);
+		}
+	}
+	insert(value, node = this.root) {
+		if (node === null) {
+			return new Node(value);
+		}
+		if (value < node.data) {
+			node.left = this.insert(value, node.left);
+		} else {
+			node.right = this.insert(value, node.right);
+		}
+		return node;
+	}
 	prettyPrint(node = this.root, prefix = '', isLeft = true) {
 		if (node === null) return;
 

@@ -1,13 +1,14 @@
 import { Tree } from './bst.js';
 
 describe('balanced binary search tree', () => {
-	let tree;
+	//let tree;
 
-	beforeEach(() => {
-		tree = new Tree([5, 3, 3, 1, 4, 2, 2]);
-	});
+	// beforeEach(() => {
+	// 	tree = new Tree([5, 3, 3, 1, 4, 2, 2]);
+	// });
 	describe('constructor and buildTree', () => {
 		test('constructor sorts and removes duplicates', () => {
+			const tree = new Tree([5, 3, 3, 1, 4, 2, 2]);
 			// The root of a balanced tree built from [1,2,3,4,5] is 3
 			expect(tree.root.data).toBe(3);
 		});
@@ -27,6 +28,33 @@ describe('balanced binary search tree', () => {
 		test('buildTree returns null for empty array', () => {
 			const tree = new Tree([]);
 			expect(tree.root).toBeNull();
+		});
+	});
+	describe('has(value)', () => {
+		test('has on an empty tree', () => {
+			const tree = new Tree([]);
+			expect(tree.has(1)).toBeFalsy();
+		});
+		test('has on an tree after insert', () => {
+			const tree = new Tree([2, 3, 4]);
+			expect(tree.has(1)).toBeFalsy();
+			expect(tree.has(2)).toBeTruthy();
+			tree.insert(1);
+			tree.insert(5);
+			expect(tree.has(1)).toBeTruthy();
+			expect(tree.has(5)).toBeTruthy();
+		});
+	});
+	describe('insert(value)', () => {
+		test('insert correctly inserts a value', () => {
+			const tree = new Tree([2, 3, 4]);
+			tree.insert(1);
+			tree.insert(5);
+			expect(tree.root.data).toBe(3);
+			expect(tree.root.left.data).toBe(2);
+			expect(tree.root.right.data).toBe(4);
+			expect(tree.root.left.left.data).toBe(1);
+			expect(tree.root.right.right.data).toBe(5);
 		});
 	});
 });
