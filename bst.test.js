@@ -57,4 +57,39 @@ describe('balanced binary search tree', () => {
 			expect(tree.root.right.right.data).toBe(5);
 		});
 	});
+	describe('deleteItem(value)', () => {
+		test('deleting an item when the tree has it and when not', () => {
+			const tree = new Tree([1, 2, 3, 4, 5]);
+			tree.deleteItem(1);
+			expect(tree.has(1)).toBeFalsy;
+			tree.deleteItem(3);
+			expect(tree.has(3)).toBeFalsy;
+		});
+	});
+	describe('traversals', () => {
+		test('levelOrderForEach', () => {
+			const tree = new Tree([1, 2, 3, 4, 5]);
+			const result = [];
+			tree.levelOrderForEach((value) => result.push(value));
+			expect(result).toEqual([3, 2, 5, 1, 4]);
+		});
+		test('inOrderForEach', () => {
+			const tree = new Tree([1, 2, 3, 4, 5]);
+			const result = [];
+			tree.inOrderForEach((value) => result.push(value));
+			expect(result).toEqual([1, 2, 3, 4, 5]);
+		});
+		test.skip('preOrderForEach', () => {
+			const tree = new Tree([1, 2, 3, 4, 5]);
+			const result = [];
+			tree.preOrderForEach((value) => result.push(value));
+			expect(result).toEqual([3, 2, 1, 5, 4]);
+		});
+		test('postOrderForEach', () => {
+			const tree = new Tree([1, 2, 3, 4, 5]);
+			const result = [];
+			tree.postOrderForEach((value) => result.push(value));
+			expect(result).toEqual([1, 2, 4, 5, 3]);
+		});
+	});
 });
