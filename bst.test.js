@@ -79,7 +79,7 @@ describe('balanced binary search tree', () => {
 			tree.inOrderForEach((value) => result.push(value));
 			expect(result).toEqual([1, 2, 3, 4, 5]);
 		});
-		test.skip('preOrderForEach', () => {
+		test('preOrderForEach', () => {
 			const tree = new Tree([1, 2, 3, 4, 5]);
 			const result = [];
 			tree.preOrderForEach((value) => result.push(value));
@@ -90,6 +90,20 @@ describe('balanced binary search tree', () => {
 			const result = [];
 			tree.postOrderForEach((value) => result.push(value));
 			expect(result).toEqual([1, 2, 4, 5, 3]);
+		});
+	});
+	describe('heighOf(value)', () => {
+		test('height of a node', () => {
+			const tree = new Tree([1, 2, 3, 4, 5]);
+			expect(tree.heightOf(2)).toBe(1);
+			expect(tree.heightOf(6)).toBeUndefined();
+		});
+	});
+	describe('depthOf(value)', () => {
+		test('depth of a node', () => {
+			const tree = new Tree([1, 2, 3, 4, 5]);
+			expect(tree.depthOf(1)).toBe(2);
+			expect(tree.depthOf(6)).toBeUndefined();
 		});
 	});
 });
