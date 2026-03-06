@@ -1,13 +1,13 @@
 import { Tree } from './bst.js';
 
 function createRandomNumberArray(number) {
-	let array = [];
+	const array = [];
 	for (let i = 0; i < number; i++) {
 		array.push(Math.floor(Math.random() * number) + 1);
 	}
 	return array;
 }
-let tree = new Tree(createRandomNumberArray(15));
+const tree = new Tree(createRandomNumberArray(15));
 tree.prettyPrint();
 console.log('Is Tree Balanced? :', tree.isBalanced());
 console.log('Lever Order:');
