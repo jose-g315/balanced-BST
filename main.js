@@ -1,38 +1,65 @@
 import { Tree } from './bst.js';
 
-// const tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-// const tree1 = new Tree([1, 2, 3, 4]);
-// tree.prettyPrint(tree1.root);
-//const tree3 = new Tree([1, 2, 3, 4, 5]);
-// tree3.insert(1);
-// tree3.insert(5);
-// const value = tree3.has(2);
-// console.log(value);
-//tree3.prettyPrint(tree3.root);
-// console.log(tree3.isBalanced());
-// tree3.insert(6);
-// tree3.insert(7);
-// tree3.insert(8);
-// tree3.prettyPrint(tree3.root);
-// console.log(tree3.isBalanced());
-//tree3.levelOrderForEach((value) => console.log(value));
-//tree3.inOrderForEach((value) => console.log(value));
-//tree3.preOrderForEach((value) => console.log(value));
-//tree3.postOrderForEach((value) => console.log(value));
-//console.log(tree3.find(5));
-// console.log('Height of 1: ', tree3.heightOf(1));
-// console.log('Height of 3: ', tree3.heightOf(3));
-// console.log('Height of 5: ', tree3.heightOf(5));
-//console.log(tree3.depthOf(1));
-const tree4 = new Tree([1]);
-tree4.prettyPrint();
-console.log(tree4.isBalanced());
-tree4.insert(2);
-tree4.insert(3);
-tree4.insert(4);
-tree4.insert(4);
-tree4.prettyPrint();
-console.log(tree4.isBalanced());
-tree4.reBalance();
-tree4.prettyPrint();
-console.log(tree4.isBalanced());
+function createRandomNumberArray(number) {
+	let array = [];
+	for (let i = 0; i < number; i++) {
+		array.push(Math.floor(Math.random() * number) + 1);
+	}
+	return array;
+}
+let tree = new Tree(createRandomNumberArray(15));
+tree.prettyPrint();
+console.log('Is Tree Balanced? :', tree.isBalanced());
+console.log('Lever Order:');
+tree.levelOrderForEach((value) => {
+	console.log(value);
+});
+tree.prettyPrint();
+console.log('Pre Order:');
+tree.preOrderForEach((value) => {
+	console.log(value);
+});
+tree.prettyPrint();
+console.log('Post Order:');
+tree.postOrderForEach((value) => {
+	console.log(value);
+});
+tree.prettyPrint();
+console.log('In Order:');
+tree.inOrderForEach((value) => {
+	console.log(value);
+});
+tree.prettyPrint();
+tree.insert(101);
+tree.insert(102);
+tree.insert(110);
+tree.insert(123);
+tree.insert(123);
+tree.insert(109);
+tree.insert(105);
+tree.prettyPrint();
+console.log('Is Tree Balanced? :', tree.isBalanced());
+tree.reBalance();
+tree.prettyPrint();
+console.log('Is Tree Balanced? :', tree.isBalanced());
+
+console.log('Lever Order:');
+tree.levelOrderForEach((value) => {
+	console.log(value);
+});
+tree.prettyPrint();
+console.log('Pre Order:');
+tree.preOrderForEach((value) => {
+	console.log(value);
+});
+tree.prettyPrint();
+console.log('Post Order:');
+tree.postOrderForEach((value) => {
+	console.log(value);
+});
+tree.prettyPrint();
+console.log('In Order:');
+tree.inOrderForEach((value) => {
+	console.log(value);
+});
+tree.prettyPrint();
