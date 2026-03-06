@@ -121,25 +121,24 @@ class Tree {
 			return node;
 		}
 		if (value < node.data) {
-			return this.find(value, node.left);
+			return this._find(value, node.left);
 		} else {
-			return this.find(value, node.right);
+			return this._find(value, node.right);
 		}
+	}
+	heightFromNode(node) {
+		if (node === null) return -1;
+
+		const left = this.heightFromNode(node.left);
+		const right = this.heightFromNode(node.right);
+
+		return Math.max(left, right) + 1;
 	}
 	heightOf(value) {
 		const node = this._find(value);
 		if (!node) return undefined;
 
-		return heightFromNode(node);
-
-		function heightFromNode(n) {
-			if (n === null) return -1;
-
-			const left = heightFromNode(n.left);
-			const right = heightFromNode(n.right);
-
-			return Math.max(left, right) + 1;
-		}
+		return this.heightFromNode(node);
 	}
 	depthOf(value, node = this.root, depth = 0) {
 		if (node === null) return undefined;
@@ -151,6 +150,25 @@ class Tree {
 		} else {
 			return this.depthOf(value, node.right, depth + 1);
 		}
+	}
+	isBalanced(node = this.root) {
+		if (node === null) return true;
+
+		const leftHeight = this.heightFromNode(node.left);
+		const rightHeight = this.heightFromNode(node.right);
+
+		if (Math.abs(leftHeight - rightHeight) > 1) {
+			return false;
+		}
+
+		return this.isBalanced(node.left) && this.isBalanced(node.right);
+	}
+	reBalance() {
+		const values = [];
+		this.inOrderForEach((value) => {
+			values.push(value);
+		});
+		this.root = this._buildTree(values);
 	}
 	prettyPrint(node = this.root, prefix = '', isLeft = true) {
 		if (node === null) return;

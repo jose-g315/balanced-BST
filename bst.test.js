@@ -1,11 +1,6 @@
 import { Tree } from './bst.js';
 
 describe('balanced binary search tree', () => {
-	//let tree;
-
-	// beforeEach(() => {
-	// 	tree = new Tree([5, 3, 3, 1, 4, 2, 2]);
-	// });
 	describe('constructor and buildTree', () => {
 		test('constructor sorts and removes duplicates', () => {
 			const tree = new Tree([5, 3, 3, 1, 4, 2, 2]);
@@ -104,6 +99,108 @@ describe('balanced binary search tree', () => {
 			const tree = new Tree([1, 2, 3, 4, 5]);
 			expect(tree.depthOf(1)).toBe(2);
 			expect(tree.depthOf(6)).toBeUndefined();
+		});
+	});
+	describe('isBalanced()', () => {
+		test('isBalanced returns true for a perfectly balanced tree', () => {
+			const tree = new Tree([1, 2, 3, 4, 5, 6, 7]); // buildTree creates balanced BST
+			expect(tree.isBalanced()).toBe(true);
+		});
+		test('isBalanced returns true for a tree that is balanced but not perfect', () => {
+			const tree = new Tree([10, 5, 15, 3, 7, 12]);
+			expect(tree.isBalanced()).toBe(true);
+		});
+		test('isBalanced returns false for a right-heavy unbalanced tree', () => {
+			const tree = new Tree([10, 5, 15]);
+			tree.insert(20);
+			tree.insert(25); // creates a chain 15 → 20 → 25
+			expect(tree.isBalanced()).toBe(false);
+		});
+		test('isBalanced returns false for a left-heavy unbalanced tree', () => {
+			const tree = new Tree([10, 5, 15]);
+			tree.insert(4);
+			tree.insert(3);
+			tree.insert(2); // chain 5 → 4 → 3 → 2
+			expect(tree.isBalanced()).toBe(false);
+		});
+		test('isBalanced returns true for an empty tree', () => {
+			const tree = new Tree([]);
+			expect(tree.isBalanced()).toBe(true);
+		});
+		test('isBalanced returns true for a single-node tree', () => {
+			const tree = new Tree([10]);
+			expect(tree.isBalanced()).toBe(true);
+		});
+		test('isBalanced returns false for a completely skewed tree', () => {
+			const tree = new Tree([1]);
+			tree.insert(2);
+			tree.insert(3);
+			tree.insert(4);
+			tree.insert(5);
+			expect(tree.isBalanced()).toBe(false);
+		});
+	});
+	describe('reBalance()', () => {
+		test('reBalance keeps a balanced tree balanced', () => {
+			const tree = new Tree([1, 2, 3, 4, 5, 6, 7]);
+			expect(tree.isBalanced()).toBe(true);
+			tree.reBalance();
+			expect(tree.isBalanced()).toBe(true);
+			const values = [];
+			tree.inOrderForEach((value) => {
+				values.push(value);
+			});
+			expect(values).toEqual([1, 2, 3, 4, 5, 6, 7]);
+		});
+		test('reBalance turns an unbalanced tree into a balanced one', () => {
+			const tree = new Tree([10]);
+			tree.insert(20);
+			tree.insert(30);
+			tree.insert(40);
+			tree.insert(50);
+			expect(tree.isBalanced()).toBe(false);
+			tree.reBalance();
+			expect(tree.isBalanced()).toBe(true);
+		});
+		test('reBalance preserves all values', () => {
+			const tree = new Tree([10]);
+			tree.insert(5);
+			tree.insert(15);
+			tree.insert(3);
+			tree.insert(7);
+			tree.insert(20);
+			tree.insert(25);
+			const before = [];
+			tree.inOrderForEach((value) => {
+				before.push(value);
+			});
+			tree.reBalance();
+			const after = [];
+			tree.inOrderForEach((value) => {
+				after.push(value);
+			});
+			expect(after).toEqual(before);
+		});
+		test('reBalance changes the structure of an unbalanced tree', () => {
+			const tree = new Tree([1]);
+			tree.insert(2);
+			tree.insert(3);
+			tree.insert(4);
+			tree.insert(5);
+			const beforeHeight = tree.heightFromNode(tree.root);
+			tree.reBalance();
+			const afterHeight = tree.heightFromNode(tree.root);
+			expect(afterHeight).toBeLessThan(beforeHeight);
+		});
+		test('reBalance works on an empty tree', () => {
+			const tree = new Tree([]);
+			tree.reBalance();
+			expect(tree.isBalanced()).toBe(true);
+			const values = [];
+			tree.inOrderForEach((value) => {
+				values.push(value);
+			});
+			expect(values).toEqual([]);
 		});
 	});
 });
